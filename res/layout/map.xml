@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="6dip" >
+
+    <ImageView
+        android:id="@+id/ImageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/LinearLayout01"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/map" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageView1"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="53dp"
+        android:text="@string/hello" />
+
+    <Button
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="  Menu  " />
+
+    <Button
+        android:id="@+id/storeButton"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
+        android:layout_alignParentLeft="true"
+        android:drawablePadding="100dip"
+        android:text=""
+        android:background = "@null" />
+
+    <Button
+        android:id="@+id/fieldButton"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
+        android:layout_alignBottom="@+id/ImageView1"
+        android:layout_alignRight="@+id/ImageView1"
+        android:layout_marginRight="14dp"
+        android:text=""
+        android:background = "@null" />
+
+</RelativeLayout>

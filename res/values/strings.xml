@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Select desired destination =D</string>
+    <string name="app_name">AceMedic</string>
+    <string name="app_name2">Store App</string>
+    <string name="store">This is the stand-in for the Store Activity</string>
+    <string name="field">This is the stand-in for the Field Activity</string>
+    <string name="mainPage">Main Page</string>
+    <string name="tasks">Tasks</string>
+    <string name="manual">Manual</string>
+    <string name="menuButton">menuButton</string>
+    <string name="storeButton"></string>
+    <string name="SELL">SELL</string>
+    <string name="BUY">BUY</string>
+    <string name="LEAVE">LEAVE</string>
+    <string name="greet">How can I help you?</string>
+    <string name="task1">Current Task: #1</string>
+    <string name="task2">Current Task: #2</string>
+    <string name="task3">Current Task: #3</string>
+    <string name="task4">Current Task: Unknown</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="task1_msg">Navigate to the manual and look up "Sprained Ankle".</string>
+    <string name="task2_msg">Navigate to the shop and buy some bandage.</string>
+    <string name="task3_msg">There\'s been an incident at the field! Head over to the field and investigate the problem!</string>
+    <string name="task4_msg">This task has not yet been assigned. Please stay tuned.</string>
+    <string name="sg">Start game</string>
+    <string name="exit">Exit</string>
+    <string name="Manual">Manual</string>
+    <string name="Back">Back</string>
+    <string name="Quit">Quit</string>
+    
+</resources>
