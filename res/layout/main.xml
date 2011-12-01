@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:visibility="visible" 
-    android:background="#C0C0C0" >
+    android:background="#FFFFFF" >
 
     <ImageView
         android:id="@+id/imageView1"
@@ -21,6 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="begin_exit"
+        android:background="@null"
         android:src="@drawable/quit" />
 
     <ImageButton
@@ -30,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/imageButton3"
         android:onClick="switch_to_manual"
+        android:background="@null"
         android:src="@drawable/manual" />
 
     <ImageButton
@@ -39,6 +41,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/ManualButton"
         android:onClick="startGame"
+        android:background="@null"
         android:src="@drawable/startbutton" />
 
 </RelativeLayout>
