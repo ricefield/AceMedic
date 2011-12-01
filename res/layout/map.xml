@@ -13,7 +13,7 @@
         android:layout_toRightOf="@+id/LinearLayout01"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/map" />
+        android:src="@drawable/town" />
 
     <TextView
         android:id="@+id/textview"
@@ -21,8 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ImageView1"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="53dp"
-        android:text="@string/hello" />
+        android:layout_marginLeft="53dp"/>
 
     <Button
         android:id="@+id/menuButton"

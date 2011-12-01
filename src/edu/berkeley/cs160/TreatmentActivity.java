@@ -23,14 +23,18 @@ public class TreatmentActivity extends Activity {
 	    _glSurfaceView = new CCGLSurfaceView(this);
 	 
 	    setContentView(_glSurfaceView);
+	    
+	    
 	}
+    
+    
     @Override
 	public void onStart()
 	{
 	    super.onStart();
 	 
 	    CCDirector.sharedDirector().attachInView(_glSurfaceView); 
-	    CCDirector.sharedDirector().setDisplayFPS(false);	 
+	    CCDirector.sharedDirector().setDisplayFPS(false);
 	    CCDirector.sharedDirector().setAnimationInterval(1.0f / 60.0f);	    
 	    CCScene scene = GreetLayer.scene();
 		CCDirector.sharedDirector().runWithScene(scene);

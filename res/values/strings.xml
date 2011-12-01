@@ -30,5 +30,6 @@
     <string name="Manual">Manual</string>
     <string name="Back">Back</string>
     <string name="Quit">Quit</string>
+    <string name="StartGameButton">StartGameButton</string>
     
 </resources>

@@ -3,50 +3,42 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:visibility="visible" >
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="100dp"
-         android:onClick="startGame"
-        android:text="@string/sg"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/button2"
-        android:onClick="switch_to_manual"
-        android:text="@string/Manual"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/button1"
-        android:onClick="begin_exit"
-        android:text="@string/Quit"
-        android:textSize="20dp" />
+    android:visibility="visible" 
+    android:background="#C0C0C0" >
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/logo" />
+
+    <ImageButton
+        android:id="@+id/QuitGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="begin_exit"
+        android:src="@drawable/quit" />
+
+    <ImageButton
+        android:id="@+id/ManualButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/imageButton3"
+        android:onClick="switch_to_manual"
+        android:src="@drawable/manual" />
+
+    <ImageButton
+        android:id="@+id/StartGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/ManualButton"
+        android:onClick="startGame"
+        android:src="@drawable/startbutton" />
 
 </RelativeLayout>

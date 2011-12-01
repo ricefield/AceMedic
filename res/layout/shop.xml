@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/leave"
             android:onClick="click_leave"
-            android:text="@string/LEAVE" />
+            android:src="@drawable/leave" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -24,19 +25,21 @@
             android:layout_weight="0.60" >
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_sell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/sell"
             android:onClick="click_sell"
-            android:text="@string/SELL" />
+            android:src="@drawable/sell" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/buy"
             android:onClick="click_buy"
-            android:text="@string/BUY" />
+            android:src="@drawable/buy" />
 
     </LinearLayout>
 

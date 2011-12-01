@@ -38,11 +38,6 @@ public class ShopActivity extends Activity {
 	public void click_leave(View view) {
 		startActivity(new Intent(ShopActivity.this, MapActivity.class));
 		finish();
-		//ListView lv = (ListView)findViewById(R.id.listView1);
-    	//lv.setVisibility(View.INVISIBLE);
-    	//TextView diag = (TextView) findViewById(R.id.textView1);
-    	//Toast.makeText(this, "Pretend window is gone!", Toast.LENGTH_LONG).show();  
-    	//diag.setText("I hate you too!");
     }
     public void click_buy(View view) {
     	final ListView lv = (ListView)findViewById(R.id.listView1);

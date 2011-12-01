@@ -1,19 +1,27 @@
 package edu.berkeley.cs160;
 
 
+import java.util.ArrayList;
+
+import org.cocos2d.actions.base.CCAction;
+import org.cocos2d.actions.base.CCRepeatForever;
 import org.cocos2d.actions.instant.CCCallFunc;
+import org.cocos2d.actions.interval.CCAnimate;
 import org.cocos2d.actions.interval.CCDelayTime;
 import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
 import org.cocos2d.menus.CCMenuItemImage;
+import org.cocos2d.nodes.CCAnimation;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
+import org.cocos2d.nodes.CCSpriteFrame;
+import org.cocos2d.nodes.CCSpriteFrameCache;
+import org.cocos2d.nodes.CCSpriteSheet;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGSize;
 import org.cocos2d.types.ccColor4B;
-import edu.berkeley.cs160.GreetLayer;
 
 import edu.berkeley.cs160.CGRect;
 import android.content.Intent;
@@ -105,6 +113,40 @@ public class GameLayer extends CCColorLayer {
 		addChild(iconlabel);
 		//footscene
 		foot.setPosition(winSize.width/2.0f, winSize.height/2.0f);
+    
+		CGSize s = CCDirector.sharedDirector().winSize();
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimDigit.plist");
+        
+        
+        CCSprite first = CCSprite.sprite("digit9.png", true);
+        CCSprite second = CCSprite.sprite("digit9.png", true);
+        first.setPosition(s.width/2, s.height - 2*first.getScaleY() - 50); 
+        second.setPosition(s.width/2 - 40, s.height - 2*first.getScaleY() - 50); 
+
+        CCSpriteSheet spritesheet = CCSpriteSheet.spriteSheet("AnimDigit.png");
+        addChild(spritesheet);
+        
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+        ArrayList<CCSpriteFrame> animFrames2 = new ArrayList<CCSpriteFrame>();
+
+      	for(int i = 5; i >= 0; i--){
+        	animFrames2.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("digit" + i + ".png"));
+        }        
+      	for(int i = 9; i >= 0; i--){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("digit" + i + ".png"));
+        }
+        
+        CCAnimation animation = CCAnimation.animation("Digit", 1.0f, animFrames);
+        CCAnimation animation2 = CCAnimation.animation("Digit", 10.0f, animFrames2);
+        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+        CCAction action2 = CCAnimate.action(animation2, false);
+        first.runAction(action);
+        second.runAction(action2);
+        spritesheet.addChild(second);
+        spritesheet.addChild(first);
+        
+	    
 		addChild(foot);
 		addChild(icing);
 		addChild(menu);
@@ -112,7 +154,10 @@ public class GameLayer extends CCColorLayer {
 		
 		//update
 		this.schedule("update");
+		this.runAction(CCSequence.actions(CCDelayTime.action(60.0f), CCCallFunc.action(this, "timeout")));
 	}
+	
+	
 	
 	public void quit(Object sender){
 		Intent task1 = new Intent(CCDirector.sharedDirector().getActivity(), MapActivity.class);
@@ -126,6 +171,8 @@ public class GameLayer extends CCColorLayer {
 	}
 	//icepack
 	public void icon2(Object sender){
+		removeChild(uparrow, true);
+		removeChild(smallred, true);
 		removeChild(red, true);
 		removeChild(m_IcePack, true);
 		removeChild(m_Bandage, true);
@@ -135,7 +182,7 @@ public class GameLayer extends CCColorLayer {
 		removeChild(status_Tape, true);
 		removeChild(status_Stool, true);
 		status_IcePack.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
-		m_IcePack.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
+		m_IcePack.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f + 100, _IcePack.getContentSize().height / 2.0f + 100));
 		//foot
 		red.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f - 50);
 		red.setOpacity(50);
@@ -151,6 +198,7 @@ public class GameLayer extends CCColorLayer {
 	
 	
 	public void icon3(Object sender){
+		removeChild(smallred, true);
 		removeChild(m_IcePack, true);
 		removeChild(m_Bandage, true);
 		removeChild(m_stool, true);
@@ -158,7 +206,7 @@ public class GameLayer extends CCColorLayer {
 		removeChild(status_Tape, true);
 		removeChild(status_Stool, true);
 		removeChild(red, true);
-		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
+		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f + 100, _IcePack.getContentSize().height / 2.0f + 100));
 		status_Tape.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
 		red.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f + 50);
 		red.setOpacity(50);
@@ -181,7 +229,7 @@ public class GameLayer extends CCColorLayer {
 		status_Stool.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
 		smallred.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f -200);
 		smallred.setOpacity(0);
-		m_stool.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
+		m_stool.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f + 100, _IcePack.getContentSize().height / 2.0f + 100));
 		addChild(uparrow);
 		addChild(smallred);
 		addChild(status_Stool);
@@ -386,6 +434,7 @@ public class GameLayer extends CCColorLayer {
     }
 	
 	public void treatment1(){
+		removeChild(foot1, true);
 		removeChild(coolfoot, true);
 		removeChild(red, true);
 		removeChild(m_Bandage, true);
@@ -400,6 +449,8 @@ public class GameLayer extends CCColorLayer {
 	}
 	
 	public void treatment2(){
+		removeChild(foot1, true);
+		removeChild(coolfoot, true);
 		removeChild(smallred, true);
 		removeChild(m_Bandage, true);
 		removeChild(treatment1, true);
@@ -414,6 +465,9 @@ public class GameLayer extends CCColorLayer {
 	}
 	
 	public void treatment3(){
+		removeChild(treatment1, true);
+		removeChild(foot1, true);
+		removeChild(coolfoot, true);
 		removeChild(smallred, true);
 		removeChild(m_Bandage, true);
 		removeChild(treatment2, true);
@@ -442,6 +496,10 @@ public class GameLayer extends CCColorLayer {
 	}
 	
 	public void upstool(){
+		removeChild(m_Bandage, true);
+		removeChild(treatment3, true);
+		removeChild(treatment1, true);
+		removeChild(treatment2, true);
 		removeChild(smallred, true);
 		removeChild(m_stool, true);
 		removeChild(treatment4, true);
@@ -455,13 +513,14 @@ public class GameLayer extends CCColorLayer {
 	}
 
 	public void finished(Object sender){
-		//this.startActivity(new Intent(map.this, TreatmentActivity.class));
-    	//CCDirector.sharedDirector().replaceScene(GreetLayer.scene());
 		Intent task1 = new Intent(CCDirector.sharedDirector().getActivity(), MapActivity.class);
-		//task1.putExtra("treatment", "ankledone");
     	CCDirector.sharedDirector().getActivity().startActivity(task1);
        	CCDirector.sharedDirector().getActivity().finish();
     	
+	}
+	
+	public void timeout(){
+		CCDirector.sharedDirector().replaceScene(GameOverLayer.scene("Timeout"));
 	}
 	
 }
