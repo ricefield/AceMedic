@@ -34,18 +34,18 @@ public final class R {
     public static final class id {
         public static final int ImageView1=0x7f050008;
         public static final int LinearLayout01=0x7f050009;
-        public static final int ManualButton=0x7f050002;
-        public static final int QuitGameButton=0x7f050001;
+        public static final int ManualButton=0x7f050001;
+        public static final int QuitGameButton=0x7f050000;
         public static final int RelativeLayout1=0x7f050007;
-        public static final int StartGameButton=0x7f050004;
+        public static final int StartGameButton=0x7f050003;
         public static final int btn_buy=0x7f050016;
         public static final int btn_leave=0x7f050013;
         public static final int btn_sell=0x7f050015;
         public static final int fieldButton=0x7f05000d;
         public static final int go=0x7f050011;
         public static final int imageButton1=0x7f050006;
-        public static final int imageButton3=0x7f050003;
-        public static final int imageView1=0x7f050000;
+        public static final int imageButton3=0x7f050002;
+        public static final int imageView1=0x7f050004;
         public static final int imageView2=0x7f050018;
         public static final int linearLayout1=0x7f050012;
         public static final int linearLayout2=0x7f050014;

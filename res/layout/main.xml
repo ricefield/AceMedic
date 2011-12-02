@@ -6,14 +6,6 @@
     android:visibility="visible" 
     android:background="#FFFFFF" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/logo" />
-
     <ImageButton
         android:id="@+id/QuitGameButton"
         android:layout_width="wrap_content"
@@ -39,9 +31,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/ManualButton"
-        android:onClick="startGame"
+        android:layout_centerHorizontal="true"
         android:background="@null"
+        android:onClick="startGame"
         android:src="@drawable/startbutton" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/logo" />
 
 </RelativeLayout>

@@ -30,6 +30,7 @@ import android.view.MotionEvent;
 
 public class GameLayer extends CCColorLayer {
 	private static final String TAG = "Wasp";
+	protected CCSprite BigMobile = CCSprite.sprite("bigmobile.png");
 	protected CCSprite _AidBox =  CCSprite.sprite("firstaidbox.png");
 	protected CCSprite _IcePack =  CCSprite.sprite("icepack.png");
 	protected CCSprite status_IcePack =  CCSprite.sprite("icepack.png");
@@ -37,6 +38,7 @@ public class GameLayer extends CCColorLayer {
 	protected CCSprite status_Tape =  CCSprite.sprite("tape.png");
 	protected CCSprite _Stool =  CCSprite.sprite("stool.png");
 	protected CCSprite status_Stool =  CCSprite.sprite("stool.png");
+	protected CCSprite status_Mobile = CCSprite.sprite("mobile.png");
 	protected CGSize winSize = CCDirector.sharedDirector().displaySize();
 	//moving tools
 	protected CCSprite m_IcePack =  CCSprite.sprite("m_icepack.png");
@@ -99,10 +101,11 @@ public class GameLayer extends CCColorLayer {
 		CCMenuItemImage IcePack = CCMenuItemImage.item("icepack.png", "icepack_click.png", this, "icon2");
 		CCMenuItemImage Tape = CCMenuItemImage.item("tape.png", "tape_clicked.png", this, "icon3");
 		CCMenuItemImage Stool = CCMenuItemImage.item("stool.png", "stool_clicked.png", this, "icon4");
+		CCMenuItemImage Mobile = CCMenuItemImage.item("mobile.png", "mobile.png", this, "icon5");
 		
 		CCMenu quitmenu = CCMenu.menu(Quit);
-		CCMenu menu = CCMenu.menu(AidBox, IcePack, Tape, Stool);
-		menu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f, winSize.height / 2.0f));
+		CCMenu menu = CCMenu.menu(AidBox, IcePack, Tape, Stool, Mobile);
+		menu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f, winSize.height / 2.0f - 20));
 		menu.alignItemsVertically(40);
 		
 		quitmenu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f + 50, winSize.height - 50));
@@ -236,6 +239,17 @@ public class GameLayer extends CCColorLayer {
 		addChild(m_stool);
 		actionIndex = 7;
 	}
+	
+	public void icon5(Object sender){
+		removeChild(status_IcePack, true);
+		removeChild(status_Tape, true);
+		removeChild(status_Stool, true);
+		BigMobile.setPosition(winSize.width/2, winSize.height/2);
+		status_Mobile.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
+		addChild(BigMobile);
+		addChild(status_Mobile);
+	}
+	
 	
 	@Override
     public boolean ccTouchesBegan(MotionEvent event) {
