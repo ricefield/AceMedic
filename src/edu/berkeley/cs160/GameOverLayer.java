@@ -1,8 +1,5 @@
 package edu.berkeley.cs160;
 
-import org.cocos2d.actions.instant.CCCallFunc;
-import org.cocos2d.actions.interval.CCDelayTime;
-import org.cocos2d.actions.interval.CCSequence;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.menus.CCMenu;
@@ -50,7 +47,7 @@ public class GameOverLayer extends CCColorLayer
 		_label.setScale(2);
 		_label.setPosition(winSize.width / 2.0f, winSize.height / 2.0f);
 		
-		CCMenuItemImage back = CCMenuItemImage.item("BackButton.png", "BackButton.png", this, "GameReturn");
+		CCMenuItemImage back = CCMenuItemImage.item("exit.png", "exit.png", this, "GameReturn");
 		CCMenu menu = CCMenu.menu(back);
 		menu.setPosition(winSize.width / 2.0f, 100);
 		

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.berkeley.cs160"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.VIBRATE" ></uses-permission>
 
     <application
         android:icon="@drawable/starticon"
@@ -46,6 +48,13 @@
         </activity>
         <activity android:name="Manual_Activity"
             android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.ALTERNATIVE" />
+            </intent-filter>
+        </activity>
+        <activity android:name="serious_TreatmentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

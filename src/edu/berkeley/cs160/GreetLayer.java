@@ -10,7 +10,8 @@ import org.cocos2d.types.CGSize;
 
 import android.content.Intent;
 
-import edu.berkeley.cs160.GameLayer;
+import edu.berkeley.cs160.concussion_gameLayer;
+import edu.berkeley.cs160.RICE_gameLayer;
 
 public class GreetLayer extends CCLayer{
 		
@@ -46,7 +47,7 @@ public class GreetLayer extends CCLayer{
 
 	
 	public void GameStart(Object sender){
-		CCDirector.sharedDirector().replaceScene(GameLayer.scene());	
+		CCDirector.sharedDirector().replaceScene(concussion_gameLayer.scene());	
 	}
 	
 	public void GameReturn(Object sender){
