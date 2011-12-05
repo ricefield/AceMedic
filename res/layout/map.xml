@@ -13,7 +13,8 @@
         android:layout_toRightOf="@+id/LinearLayout01"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/town" />
+        android:src="@drawable/newtown" />
+    
 
     <TextView
         android:id="@+id/textview"
@@ -32,22 +33,30 @@
         android:text="  Menu  " />
 
     <Button
-        android:id="@+id/storeButton"
+        android:id="@+id/fieldButton"
         android:layout_width="300dp"
         android:layout_height="220dp"
         android:layout_alignParentLeft="true"
         android:drawablePadding="100dip"
         android:text=""
         android:background = "@null" />
-
+
     <Button
-        android:id="@+id/fieldButton"
+        android:id="@+id/storeButton"
         android:layout_width="300dp"
         android:layout_height="220dp"
-        android:layout_alignBottom="@+id/ImageView1"
+        android:layout_alignBottom="@+id/fieldButton"
         android:layout_alignRight="@+id/ImageView1"
-        android:layout_marginRight="14dp"
-        android:text=""
-        android:background = "@null" />
+        android:layout_below="@+id/menuButton"
+        android:background="@null" />
+
+    <Button
+        android:id="@+id/footballButton"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
+        android:layout_alignLeft="@+id/ImageView1"
+        android:layout_alignParentBottom="true"
+        android:drawablePadding="100dip" 
+        android:background="@null" />
 
 </RelativeLayout>

@@ -79,6 +79,11 @@ public class concussion_gameLayer extends CCColorLayer {
 	CCMenu dialButton;
 	CCSpriteSheet spritesheet1 = CCSpriteSheet.spriteSheet("AnimTreatment1.png");
 	CCSpriteSheet spritesheet2 = CCSpriteSheet.spriteSheet("AnimMobile.png");
+	CCSpriteSheet spritesheet3;
+	CCSpriteSheet spritesheet4;
+	CCSpriteSheet spritesheet6;
+	
+	protected CCSprite warning = CCSprite.sprite("warning.png");
 	
 	
 	public static CCScene scene()
@@ -95,6 +100,7 @@ public class concussion_gameLayer extends CCColorLayer {
 		
 		//icons
 		CCMenuItemImage Quit = CCMenuItemImage.item("exit.png", "exit.png", this, "quit");
+		CCMenuItemImage Question = CCMenuItemImage.item("questionmark.png", "questionclick.png", this, "help");
 		CCMenuItemImage AidBox = CCMenuItemImage.item("firstaidbox.png", "firstaidbox.png", this, "icon1");
 		CCMenuItemImage IcePack = CCMenuItemImage.item("icepack.png", "icepack_click.png", this, "icon2");
 		CCMenuItemImage Tape = CCMenuItemImage.item("tape.png", "tape_clicked.png", this, "icon3");
@@ -102,12 +108,16 @@ public class concussion_gameLayer extends CCColorLayer {
 		CCMenuItemImage Mobile = CCMenuItemImage.item("mobile.png", "mobile.png", this, "icon5");
 		
 		CCMenu quitmenu = CCMenu.menu(Quit);
+		CCMenu helpbutton = CCMenu.menu(Question);
 		CCMenu menu = CCMenu.menu(AidBox, IcePack, Tape, Stool, Mobile);
 		menu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f, winSize.height / 2.0f - 20));
 		menu.alignItemsVertically(40);
 		
+		
 		quitmenu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f + 50, winSize.height - 50));
-		icing.setPosition(850, 80);
+		//icing.setPosition(850, 80);
+		CCSprite concussion = CCSprite.sprite("concussion.jpg");
+		concussion.setPosition(winSize.width/2, winSize.height/2);
 		
 		CCSprite iconlabel =  CCSprite.sprite("icon button.png");
 		iconlabel.setPosition(winSize.width - 2*(iconlabel.getContentSize().width / 2.0f), winSize.height- 2*(iconlabel.getContentSize().height / 2.0f));
@@ -148,15 +158,49 @@ public class concussion_gameLayer extends CCColorLayer {
         spritesheet.addChild(first);
         
 	   
-		addChild(icing);
+		//addChild(icing);
 		addChild(menu);
 		addChild(quitmenu);
-		
+		addChild(concussion);
+		addChild(helpbutton);
 		//update
 		this.schedule("update");
-		this.runAction(CCSequence.actions(CCDelayTime.action(100.0f), CCCallFunc.action(this, "timeout")));
+		this.runAction(CCSequence.actions(CCDelayTime.action(20.0f), CCCallFunc.action(this, "timeout")));
 	}
 	
+	public void help(Object sender){
+		CGSize s = CCDirector.sharedDirector().winSize();
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimArm.plist");
+        
+        CCSprite mobile = CCSprite.sprite("digit9.png", true);
+        mobile.setPosition(s.width/2, s.height/2); 
+
+        spritesheet6 = CCSpriteSheet.spriteSheet("AnimArm.png");
+        addChild(spritesheet6);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+        
+      	for(int i = 1; i <= 3; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        }
+      	for(int i = 4; i <= 9; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        }   
+        CCAnimation animation = CCAnimation.animation("Arm", 0.2f, animFrames);
+        CCAction action = CCAnimate.action(animation, false);
+        mobile.runAction(action);
+        
+        spritesheet6.addChild(mobile);
+        this.runAction(CCSequence.actions(CCDelayTime.action(3.2f), CCCallFunc.action(this, "removehelp")));
+	}
+	
+	public void removehelp(){
+		removeChild(spritesheet6, true);
+	}
 	
 	
 	public void quit(Object sender){
@@ -184,10 +228,14 @@ public class concussion_gameLayer extends CCColorLayer {
 		removeChild(smallred,true);
 		removeChild(red, true);
 		removeChild(uparrow, true);
+		removeChild(warning, true);
+		warning.setPosition(winSize.width/2.0f, winSize.height/2.0f);
+		addChild(warning);
 		}
 	
 	
 	public void icon3(Object sender){
+		removeChild(warning, true);
 		removeChild(dialButton, true);
 		removeChild(spritesheet2, true);
 		removeChild(m_IcePack, true);
@@ -201,9 +249,12 @@ public class concussion_gameLayer extends CCColorLayer {
 		removeChild(smallred,true);
 		removeChild(red, true);
 		removeChild(uparrow, true);
+		warning.setPosition(winSize.width/2.0f, winSize.height/2.0f);
+		addChild(warning);
 	}
 	
 	public void icon4(Object sender){
+		removeChild(warning, true);
 		removeChild(dialButton, true);
 		removeChild(spritesheet2, true);
 		removeChild(m_IcePack, true);
@@ -217,9 +268,12 @@ public class concussion_gameLayer extends CCColorLayer {
 		removeChild(smallred,true);
 		removeChild(red, true);
 		removeChild(uparrow, true);
+		warning.setPosition(winSize.width/2.0f, winSize.height/2.0f);
+		addChild(warning);
 	}
 	
 	public void icon5(Object sender){
+		removeChild(warning, true);
 		removeChild(dialButton, true);
 		removeChild(spritesheet2, true);
 		removeChild(m_IcePack, true);
@@ -266,11 +320,31 @@ public class concussion_gameLayer extends CCColorLayer {
 		addChild(status_Mobile);
 	}
 	
-	public void dail(Object sender){
+	public void dial(Object sender){
 		removeChild(dialButton, true);
 		removeChild(spritesheet2, true);
+		CGSize s = CCDirector.sharedDirector().winSize();
 		
-		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("Anim911.plist");
+        
+        CCSprite mobile = CCSprite.sprite("digit9.png", true);
+        mobile.setPosition(s.width/2, s.height/2); 
+
+        spritesheet3 = CCSpriteSheet.spriteSheet("Anim911.png");
+        addChild(spritesheet3);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+
+      	for(int i = 1; i <= 3; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("call" + i + ".png"));
+        }        
+        CCAnimation animation = CCAnimation.animation("Mobile", 0.8f, animFrames);
+        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+        mobile.runAction(action);
+        spritesheet3.addChild(mobile);
+		this.runAction(CCSequence.actions(CCDelayTime.action(2.4f), CCCallFunc.action(this, "dial911")));
+				
 	}
 	
 	@Override
@@ -584,5 +658,8 @@ public class concussion_gameLayer extends CCColorLayer {
 		CCDirector.sharedDirector().replaceScene(GameOverLayer.scene("Timeout"));
 	}
 	
+	public void dial911(){
+		CCDirector.sharedDirector().replaceScene(GameOverLayer.scene("Professional is coming!"));
+	}
 }
 

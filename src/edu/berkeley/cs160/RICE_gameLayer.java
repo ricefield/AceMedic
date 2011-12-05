@@ -79,6 +79,12 @@ public class RICE_gameLayer extends CCColorLayer {
 	CCMenu dialButton;
 	CCSpriteSheet spritesheet1 = CCSpriteSheet.spriteSheet("AnimTreatment1.png");
 	CCSpriteSheet spritesheet2 = CCSpriteSheet.spriteSheet("AnimMobile.png");
+	CCSpriteSheet spritesheet3;
+	CCSpriteSheet spritesheet4;
+	CCSpriteSheet spritesheet5;
+	CCSpriteSheet spritesheet6;
+	CCSpriteSheet spritesheet7;
+	
 	
 	public static CCScene scene()
 	{
@@ -94,6 +100,7 @@ public class RICE_gameLayer extends CCColorLayer {
 		
 		//icons
 		CCMenuItemImage Quit = CCMenuItemImage.item("exit.png", "exit.png", this, "quit");
+		CCMenuItemImage Question = CCMenuItemImage.item("questionmark.png", "questionclick.png", this, "help");
 		CCMenuItemImage AidBox = CCMenuItemImage.item("firstaidbox.png", "firstaidbox.png", this, "icon1");
 		CCMenuItemImage IcePack = CCMenuItemImage.item("icepack.png", "icepack_click.png", this, "icon2");
 		CCMenuItemImage Tape = CCMenuItemImage.item("tape.png", "tape_clicked.png", this, "icon3");
@@ -101,12 +108,15 @@ public class RICE_gameLayer extends CCColorLayer {
 		CCMenuItemImage Mobile = CCMenuItemImage.item("mobile.png", "mobile.png", this, "icon5");
 		
 		CCMenu quitmenu = CCMenu.menu(Quit);
+		CCMenu helpbutton = CCMenu.menu(Question);
 		CCMenu menu = CCMenu.menu(AidBox, IcePack, Tape, Stool, Mobile);
 		menu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f, winSize.height / 2.0f - 20));
 		menu.alignItemsVertically(40);
 		
 		quitmenu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f + 50, winSize.height - 50));
 		icing.setPosition(850, 80);
+		
+		helpbutton.setPosition(240, winSize.height - 50);
 		
 		CCSprite iconlabel =  CCSprite.sprite("icon button.png");
 		iconlabel.setPosition(winSize.width - 2*(iconlabel.getContentSize().width / 2.0f), winSize.height- 2*(iconlabel.getContentSize().height / 2.0f));
@@ -151,12 +161,48 @@ public class RICE_gameLayer extends CCColorLayer {
 		addChild(icing);
 		addChild(menu);
 		addChild(quitmenu);
+		addChild(helpbutton);
 		
 		//update
 		this.schedule("update");
 		this.runAction(CCSequence.actions(CCDelayTime.action(60.0f), CCCallFunc.action(this, "timeout")));
 	}
 	
+	
+	
+	public void help(Object sender){
+		CGSize s = CCDirector.sharedDirector().winSize();
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimArm.plist");
+        
+        CCSprite mobile = CCSprite.sprite("digit9.png", true);
+        mobile.setPosition(s.width/2, s.height/2); 
+
+        spritesheet6 = CCSpriteSheet.spriteSheet("AnimArm.png");
+        addChild(spritesheet6);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+        
+      	for(int i = 1; i <= 3; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        }
+      	for(int i = 4; i <= 9; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("help" + i + ".png"));
+        }   
+        CCAnimation animation = CCAnimation.animation("Arm", 0.2f, animFrames);
+        CCAction action = CCAnimate.action(animation, false);
+        mobile.runAction(action);
+        
+        spritesheet6.addChild(mobile);
+        this.runAction(CCSequence.actions(CCDelayTime.action(3.2f), CCCallFunc.action(this, "removehelp")));
+	}
+	
+	public void removehelp(){
+		removeChild(spritesheet6, true);
+	}
 	
 	
 	public void quit(Object sender){
@@ -219,6 +265,11 @@ public class RICE_gameLayer extends CCColorLayer {
 		removeChild(uparrow, true);
 		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f + 100, _IcePack.getContentSize().height / 2.0f + 100));
 		status_Tape.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
+		if(actionIndex != 1){
+			addChild(status_Tape);
+			addChild(m_Bandage);
+			return;
+		}
 		red.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f + 50);
 		red.setOpacity(50);
 		addChild(red);
@@ -241,12 +292,36 @@ public class RICE_gameLayer extends CCColorLayer {
 		removeChild(smallred,true);
 		removeChild(red, true);
 		removeChild(uparrow, true);
-		uparrow.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f -250);
+		uparrow.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f - 150);
 		status_Stool.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
-		smallred.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f -200);
+		smallred.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f -50);
 		smallred.setOpacity(0);
-		m_stool.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f + 100, _IcePack.getContentSize().height / 2.0f + 100));
-		addChild(uparrow);
+		m_stool.setPosition(winSize.width/2.0f - 20, 100);
+		if(actionIndex != 6){
+			addChild(status_Stool);
+			addChild(m_stool);
+			return;
+		}
+		//addChild(uparrow);
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimUp.plist");
+        
+        CCSprite up = CCSprite.sprite("digit9.png", true);
+        up.setPosition(winSize.width/2.0f - 20, winSize.height/2.0f - 150);
+
+        spritesheet5 = CCSpriteSheet.spriteSheet("AnimUp.png");
+        addChild(spritesheet5);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+
+      	for(int i = 1; i <= 3; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("uparrow" + i + ".png"));
+        }        
+        CCAnimation animation = CCAnimation.animation("Mobile", 0.1f, animFrames);
+        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+        up.runAction(action);
+        spritesheet5.addChild(up);
 		addChild(smallred);
 		addChild(status_Stool);
 		addChild(m_stool);
@@ -267,7 +342,7 @@ public class RICE_gameLayer extends CCColorLayer {
 		removeChild(smallred,true);
 		removeChild(red, true);
 		removeChild(uparrow, true);
-		//BigMobile.setPosition(winSize.width/2, winSize.height/2);
+		BigMobile.setPosition(winSize.width/2, winSize.height/2);
 		status_Mobile.setPosition(winSize.width - 2*(_IcePack.getContentSize().width / 2.0f), winSize.height- 2*(_IcePack.getContentSize().height / 2.0f));
 		
 		CCMenuItemImage Dial = CCMenuItemImage.item("small-red.png", "small-red.png", this, "dial");
@@ -296,6 +371,12 @@ public class RICE_gameLayer extends CCColorLayer {
         mobile.runAction(action);
         spritesheet2.addChild(mobile);
         
+		if(actionIndex != 10){
+			addChild(status_Mobile);
+			addChild(BigMobile);
+			return;
+		}
+		
         addChild(dialButton);
 		addChild(status_Mobile);
 	}
@@ -448,7 +529,7 @@ public class RICE_gameLayer extends CCColorLayer {
 		
 		if(CGRect.intersects(redRect, icePackRect) && actionIndex == 1){
 			if(redIndex == 0){
-				this.runAction(CCSequence.actions(CCDelayTime.action(1.5f), CCCallFunc.action(this, "coolfoot")));
+				this.runAction(CCSequence.actions(CCDelayTime.action(3.0f), CCCallFunc.action(this, "coolfoot")));
 			}
 			redIndex = 1;
 		}
@@ -504,15 +585,19 @@ public class RICE_gameLayer extends CCColorLayer {
     }
 	
 	public void treatment1(){
+		removeChild(spritesheet1, true);
+		removeChild(spritesheet2, true);
+		removeChild(spritesheet3, true);
+		removeChild(spritesheet4, true);
 		removeChild(foot1, true);
 		removeChild(coolfoot, true);
 		removeChild(red, true);
 		removeChild(m_Bandage, true);
 		smallred.setPosition(winSize.width / 2.0f + 170, winSize.height / 2.0f);
 		smallred.setOpacity(0);
-		//treatment1.setPosition(winSize.width / 2.0f, winSize.height / 2.0f);
-		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
-		//addChild(treatment1);
+		treatment1.setPosition(winSize.width / 2.0f, winSize.height / 2.0f);
+		m_Bandage.setPosition(winSize.width /2.0f - 150, winSize.height / 2.0f + 50);
+		addChild(treatment1);
 		
 		
 		CGSize s = CCDirector.sharedDirector().winSize();
@@ -520,7 +605,7 @@ public class RICE_gameLayer extends CCColorLayer {
         CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimTreatment1.plist");
         
         CCSprite arrow = CCSprite.sprite("digit9.png", true);
-        arrow.setPosition(s.width/2, s.height/2); 
+        arrow.setPosition(s.width/2 + 84, s.height/2 + 12); 
 
         spritesheet1 = CCSpriteSheet.spriteSheet("AnimTreatment1.png");
         addChild(spritesheet1);
@@ -528,8 +613,8 @@ public class RICE_gameLayer extends CCColorLayer {
        
         ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
 
-      	for(int i = 1; i <= 7; i++){
-        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("firsttreat" + i + ".png"));
+      	for(int i = 1; i <= 8; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("arrow" + i + ".png"));
         }        
         CCAnimation animation = CCAnimation.animation("Treat", 0.1f, animFrames);
         CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
@@ -544,6 +629,9 @@ public class RICE_gameLayer extends CCColorLayer {
 	
 	public void treatment2(){
 		removeChild(spritesheet1, true);
+		removeChild(spritesheet2, true);
+		removeChild(spritesheet3, true);
+		removeChild(spritesheet4, true);
 		removeChild(foot1, true);
 		removeChild(coolfoot, true);
 		removeChild(smallred, true);
@@ -552,14 +640,39 @@ public class RICE_gameLayer extends CCColorLayer {
 		smallred.setPosition(winSize.width / 2.0f + 50, winSize.height / 2.0f - 100);
 		smallred.setOpacity(0);
 		treatment2.setPosition(winSize.width / 2.0f, winSize.height / 2.0f);
-		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
+		m_Bandage.setPosition(winSize.width /2.0f, winSize.height / 2.0f + 200);
 		addChild(treatment2);
+		
+		CGSize s = CCDirector.sharedDirector().winSize();
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimTreatment2.plist");
+        
+        CCSprite arrow = CCSprite.sprite("digit9.png", true);
+        arrow.setPosition(s.width/2, s.height/2); 
+
+        spritesheet3 = CCSpriteSheet.spriteSheet("AnimTreatment2.png");
+        addChild(spritesheet3);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+
+      	for(int i = 1; i <= 6; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("arrow" + i + ".png"));
+        }        
+        CCAnimation animation = CCAnimation.animation("Treat", 0.1f, animFrames);
+        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+        arrow.runAction(action);
+        spritesheet3.addChild(arrow);
 		addChild(m_Bandage);
 		addChild(smallred);
 		actionIndex = 4;
 	}
 	
 	public void treatment3(){
+		removeChild(spritesheet1, true);
+		removeChild(spritesheet2, true);
+		removeChild(spritesheet3, true);
+		removeChild(spritesheet4, true);
 		removeChild(treatment1, true);
 		removeChild(foot1, true);
 		removeChild(coolfoot, true);
@@ -569,14 +682,39 @@ public class RICE_gameLayer extends CCColorLayer {
 		smallred.setPosition(winSize.width / 2.0f + 80, winSize.height / 2.0f - 100);
 		smallred.setOpacity(0);
 		treatment3.setPosition(winSize.width / 2.0f, winSize.height / 2.0f);
-		m_Bandage.setPosition(CGPoint.ccp(_IcePack.getContentSize().width * 2.0f - 40, _IcePack.getContentSize().height / 2.0f + 25));
+		m_Bandage.setPosition(winSize.width /2.0f - 200, winSize.height / 2.0f);
 		addChild(treatment3);
+		
+CGSize s = CCDirector.sharedDirector().winSize();
+		
+        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimTreatment3.plist");
+        
+        CCSprite arrow = CCSprite.sprite("digit9.png", true);
+        arrow.setPosition(s.width/2 + 19 , s.height/2 - 15); 
+
+        spritesheet4 = CCSpriteSheet.spriteSheet("AnimTreatment3.png");
+        addChild(spritesheet4);
+        
+       
+        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+
+      	for(int i = 1; i <= 8; i++){
+        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("arrow" + i + ".png"));
+        }        
+        CCAnimation animation = CCAnimation.animation("Treat", 0.1f, animFrames);
+        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+        arrow.runAction(action);
+        spritesheet4.addChild(arrow);
 		addChild(m_Bandage);
 		addChild(smallred);
 		actionIndex = 5;
 	}
 	
 	public void treatment4(){
+		removeChild(spritesheet1, true);
+		removeChild(spritesheet2, true);
+		removeChild(spritesheet3, true);
+		removeChild(spritesheet4, true);
 		removeChild(smallred, true);
 		removeChild(m_Bandage, true);
 		removeChild(treatment3, true);
@@ -599,6 +737,11 @@ public class RICE_gameLayer extends CCColorLayer {
 		removeChild(m_stool, true);
 		removeChild(treatment4, true);
 		removeChild(uparrow, true);
+		removeChild(spritesheet1, true);
+		removeChild(spritesheet2, true);
+		removeChild(spritesheet3, true);
+		removeChild(spritesheet4, true);
+		removeChild(spritesheet5, true);
 		CCMenuItemImage done = CCMenuItemImage.item("done.png", "done.png", this, "finished");
 		CCMenu donebutton = CCMenu.menu(done);
 		donebutton.setPosition(winSize.width/2, 100);

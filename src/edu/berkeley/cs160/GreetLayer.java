@@ -21,7 +21,7 @@ public class GreetLayer extends CCLayer{
 	    CCLayer layer = new GreetLayer();
 	    CGSize winSize = CCDirector.sharedDirector().displaySize();
 	    //Greeting
-	    CCSprite _Greeting =  CCSprite.sprite("greetingscene.png");
+	    CCSprite _Greeting =  CCSprite.sprite("concussion_greeting.png");
 	    _Greeting.setPosition(winSize.width/2, winSize.height/2);
 	    CCSprite scenario = CCSprite.sprite("scenario.png");
 	    scenario.setPosition(winSize.width/2, winSize.height/2);

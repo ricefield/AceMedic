@@ -3,7 +3,7 @@ package edu.berkeley.cs160;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCGLSurfaceView;
-import edu.berkeley.cs160.GreetLayer;
+import edu.berkeley.cs160.serious_GreetLayer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
@@ -36,7 +36,7 @@ public class serious_TreatmentActivity extends Activity {
 	    CCDirector.sharedDirector().attachInView(_glSurfaceView); 
 	    CCDirector.sharedDirector().setDisplayFPS(false);
 	    CCDirector.sharedDirector().setAnimationInterval(1.0f / 60.0f);	    
-	    CCScene scene = GreetLayer.scene();
+	    CCScene scene = serious_GreetLayer.scene();
 		CCDirector.sharedDirector().runWithScene(scene);
 	}
 	

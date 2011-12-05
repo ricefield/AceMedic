@@ -17,7 +17,7 @@ public class Manual_Activity extends Activity{
 
 
 		WebView webview = (WebView) findViewById(R.id.webView1);
-		webview.loadUrl("file:///android_asset/manual.html"); 
+		webview.loadUrl("file:///android_asset/contents.html"); 
 	}
 
 

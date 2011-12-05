@@ -79,9 +79,9 @@
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>
-		<string>{1024, 512}</string>
+		<string>{1024, 1024}</string>
 		<key>name</key>
-		<string>Untitled</string>
+		<string>mobile</string>
 		<key>premultipliedAlpha</key>
 		<false/>
 		<key>target</key>

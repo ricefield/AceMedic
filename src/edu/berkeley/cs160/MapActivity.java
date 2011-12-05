@@ -50,6 +50,9 @@ public class MapActivity extends Activity {
 
 		Button field = (Button) findViewById(R.id.fieldButton);
 		field.setOnClickListener(fieldClickListener);
+		
+		Button football = (Button) findViewById(R.id.footballButton);
+		football.setOnClickListener(footballClickListener);
 
 		Button menu = (Button) findViewById(R.id.menuButton);
 		menu.setOnClickListener(menuClickListener);
@@ -64,9 +67,16 @@ public class MapActivity extends Activity {
 		}
 	};
 
-	private final OnClickListener fieldClickListener = new OnClickListener() {
+	private final OnClickListener footballClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			MapActivity.this.startActivity(new Intent(MapActivity.this, TreatmentActivity.class));
+			finish();
+		}
+	};
+	
+	private final OnClickListener fieldClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			MapActivity.this.startActivity(new Intent(MapActivity.this, serious_TreatmentActivity.class));
 			finish();
 		}
 	};
