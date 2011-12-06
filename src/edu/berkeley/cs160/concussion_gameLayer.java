@@ -116,6 +116,8 @@ public class concussion_gameLayer extends CCColorLayer {
 		
 		quitmenu.setPosition(CGPoint.ccp(_Tape.getContentSize().width / 2.0f + 50, winSize.height - 50));
 		//icing.setPosition(850, 80);
+		
+		helpbutton.setPosition(240, winSize.height - 50);
 		CCSprite concussion = CCSprite.sprite("concussion.jpg");
 		concussion.setPosition(winSize.width/2, winSize.height/2);
 		

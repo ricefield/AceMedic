@@ -84,6 +84,7 @@ public class RICE_gameLayer extends CCColorLayer {
 	CCSpriteSheet spritesheet5;
 	CCSpriteSheet spritesheet6;
 	CCSpriteSheet spritesheet7;
+	CCSpriteSheet spritesheet8;
 	
 	
 	public static CCScene scene()
@@ -529,13 +530,33 @@ public class RICE_gameLayer extends CCColorLayer {
 		
 		if(CGRect.intersects(redRect, icePackRect) && actionIndex == 1){
 			if(redIndex == 0){
-				this.runAction(CCSequence.actions(CCDelayTime.action(3.0f), CCCallFunc.action(this, "coolfoot")));
+				CGSize s = CCDirector.sharedDirector().winSize();
+				
+		        CCSpriteFrameCache.sharedSpriteFrameCache().addSpriteFrames("AnimClock.plist");
+		        
+		        CCSprite mobile = CCSprite.sprite("digit9.png", true);
+		        mobile.setPosition(s.width/2, s.height/2); 
+
+		        spritesheet8 = CCSpriteSheet.spriteSheet("AnimClock.png");
+		        addChild(spritesheet8);
+		        
+		       
+		        ArrayList<CCSpriteFrame> animFrames = new ArrayList<CCSpriteFrame>();
+
+		      	for(int i = 1; i <= 9; i++){
+		        	animFrames.add(CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName("timerSprite" + i + ".png"));
+		        }        
+		        CCAnimation animation = CCAnimation.animation("Mobile", 0.3f, animFrames);
+		        CCAction action = CCRepeatForever.action(CCAnimate.action(animation, false));
+		        mobile.runAction(action);
+		        spritesheet8.addChild(mobile);
+				this.runAction(CCSequence.actions(CCDelayTime.action(2.7f), CCCallFunc.action(this, "coolfoot")));
 			}
 			redIndex = 1;
 		}
 		
 		if(CGRect.intersects(redRect, bandageRect) && actionIndex == 2){
-			if(redIndex == 1){
+			if(redIndex == 1){		        
 				this.runAction(CCSequence.actions(CCDelayTime.action(1.0f), CCCallFunc.action(this, "treatment1")));
 			}
 			redIndex = 2;
@@ -571,6 +592,7 @@ public class RICE_gameLayer extends CCColorLayer {
 	}
 	
 	public void coolfoot(){
+		removeChild(spritesheet8, true);
     	removeChild(foot1, true);
     	removeChild(red, true);
     	removeChild(m_IcePack, true);
@@ -589,6 +611,7 @@ public class RICE_gameLayer extends CCColorLayer {
 		removeChild(spritesheet2, true);
 		removeChild(spritesheet3, true);
 		removeChild(spritesheet4, true);
+		removeChild(spritesheet8, true);
 		removeChild(foot1, true);
 		removeChild(coolfoot, true);
 		removeChild(red, true);

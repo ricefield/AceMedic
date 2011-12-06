@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="  Menu  " />
+        android:text = " menu " />
 
     <Button
         android:id="@+id/fieldButton"
@@ -58,5 +58,13 @@
         android:layout_alignParentBottom="true"
         android:drawablePadding="100dip" 
         android:background="@null" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ImageView1"
+        android:src="@drawable/menu1" />
 
 </RelativeLayout>

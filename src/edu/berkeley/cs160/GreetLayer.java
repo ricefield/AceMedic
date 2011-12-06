@@ -23,7 +23,7 @@ public class GreetLayer extends CCLayer{
 	    //Greeting
 	    CCSprite _Greeting =  CCSprite.sprite("concussion_greeting.png");
 	    _Greeting.setPosition(winSize.width/2, winSize.height/2);
-	    CCSprite scenario = CCSprite.sprite("scenario.png");
+	    CCSprite scenario = CCSprite.sprite("scenario2.png");
 	    scenario.setPosition(winSize.width/2, winSize.height/2);
 	    scenario.setOpacity(180);
 	    scene.addChild(_Greeting);
